@@ -1,0 +1,184 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[░▒▓](pink)\
+[ 󱚝 ](bg:pink fg:black)\
+[](bg:cyan fg:pink)\
+$directory\
+[](fg:cyan bg:bright_black)\
+$git_branch\
+$git_status\
+[](fg:bright_black bg:pink)\
+$cpp\
+$elm\
+$java\
+$python\
+$scala\
+$golang\
+$c\
+$elixir\
+$haskell\
+$kotlin\
+$nim\
+$rust\
+$gradle\
+$julia\
+$conda\
+$nodejs\
+$php\
+[](fg:pink bg:black)\
+$docker_context\
+$time\
+[ ](fg:black)\
+\n$character"""
+
+palette = 'miami_wind'
+
+[directory]
+style = "fg:black bg:cyan"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:bright_black"
+format = '[[ $symbol $branch ](fg:cyan bg:bright_black)]($style)'
+
+[git_status]
+style = "bg:bright_black"
+format = '[[$all_status ($ahead_behind)](fg:pink bg:bright_black)]($style)'
+
+[c]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:black"
+format = '[[ $symbol ($version) ](fg:pink bg:black)]($style)'
+
+[elixir]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[elm]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[gradle]
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[java]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[julia]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[python]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:black bg:pink)]($style)'
+
+[conda]
+symbol = "  "
+style = "bg:pink"
+format = '[[$symbol ($environment)](fg:black bg:pink)]($style)'
+ignore_base = false
+
+[nim]
+symbol = "󰆥 "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[scala]
+symbol = " "
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[php]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol ($version) ](fg:black bg:pink)]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:black"
+format = '[[  $time ](fg:pink bg:black)]($style)'
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
+vimcmd_replace_symbol = '[❮](bold fg:purple)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+
+[palettes.miami_wind]
+pink = "#f472b6"
+cyan = "#22d3ee"
+dark_cyan = "#38bdf8"
+yellow = "#fef08a"
+purple = "#c084fc"
+blue = "#818cf8"
+green = "#34d399"
+red = "#f87171"
+orange = "#fdba74"
+black = "#1e1e2e"
+white = "#a6adc8"
+bright_pink = "#ec4899"
+bright_blue = "#2563eb"
+bright_yellow = "#fde047"
+bright_green = "#4ade80"
+bright_red = "#f43f5e"
+bright_orange = "#fb923c"
+bright_purple = "#a78bfa"
+bright_white = "#bac2de"
+bright_black = "#585b70"
