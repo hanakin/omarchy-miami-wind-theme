@@ -7,7 +7,7 @@ palette = "miami_wind"
 
 format = """
 [░▒▓](pink)\
-$os\
+[ 󱚝 ](bg:pink fg:black)\
 $directory\
 ${custom.git_block}\
 ${custom.left_endcap}\
@@ -15,32 +15,6 @@ $fill\
 ${custom.right_strip}\
 $line_break\
 $character"""
-
-[os]
-disabled = false
-style = "bg:pink fg:black"
-format = "[ $symbol ]($style)"
-
-[os.symbols]
-Alpaquita = ""
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-CentOS = ""
-Debian = ""
-Fedora = "󰣛"
-Linux = "󰌽"
-Macos = "󱚝"
-Mint = "󰣭"
-NixOS = ""
-openSUSE = ""
-Pop = ""
-Raspbian = ""
-Redhat = "󱄛"
-Ubuntu = "󰕈"
-Unknown = ""
-Windows = "󰍲"
 
 [directory]
 style = "fg:black bg:cyan"
@@ -58,7 +32,7 @@ truncate_to_repo = false
 
 [custom.git_block]
 when = 'git rev-parse --is-inside-work-tree >/dev/null 2>&1'
-command = "/Users/hanakin/.config/starship/git-block.sh render"
+command = "$HOME/.config/omarchy/current/theme/starship/git-block.sh render"
 format = "$output"
 unsafe_no_escape = true
 
@@ -69,7 +43,7 @@ format = "[$output](fg:cyan)"
 
 [custom.right_strip]
 when = "true"
-command = "/Users/hanakin/.config/starship/right-strip.sh"
+command = "$HOME/.config/omarchy/current/theme/starship/right-strip.sh"
 format = "$output"
 unsafe_no_escape = true
 

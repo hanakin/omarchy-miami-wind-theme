@@ -135,9 +135,9 @@ segment_direnv() {
 }
 
 if [ "$status" -eq 0 ] 2>/dev/null; then
-  append_segment "$green_bg" " ✔ "
+  append_segment "$green_bg" "  "
 else
-  append_segment "$red_bg" " ✘$status "
+  append_segment "$red_bg" "  $status "
 fi
 
 if [ "$duration" -ge 3000 ] 2>/dev/null; then
