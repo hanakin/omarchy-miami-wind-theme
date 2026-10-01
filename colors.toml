@@ -1,0 +1,25 @@
+accent = "#818cf8"
+selection = "#f472b6"
+
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+color0 = "#1e1e2e"
+color1 = "#f87171"
+color2 = "#34d399"
+color3 = "#fef08a"
+color4 = "#818cf8"
+color5 = "#f472b6"
+color6 = "#22d3ee"
+color7 = "#cdd6f4"
+color8 = "#585b70"
+color9 = "#f43f5e"
+color10 = "#4ade80"
+color11 = "#fde047"
+color12 = "#2563eb"
+color13 = "#ec4899"
+color14 = "#38bdf8"
+color15 = "#a6adc8"
+
+# Preserve the border color from the original hyprland.conf.
+hyprland_active_border = "#f472b6"

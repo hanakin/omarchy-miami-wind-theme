@@ -19,10 +19,9 @@ fi
 
 ln -sfn "$THEME_DIR/fastfetch/config.jsonc" "$CONFIG_TARGET"
 
-# Keep the old about.txt symlink for compatibility, even though the current config uses robot.svg directly.
+# The custom layout renders the bundled text logo.
 ln -sfn "$THEME_DIR/fastfetch/about.txt" "$LOGO_TARGET"
 
 echo "Fastfetch now uses:"
 echo "  $THEME_DIR/fastfetch/config.jsonc"
-echo "  SVG logo: $HOME/Downloads/robot.svg"
-echo "  Legacy text logo: $THEME_DIR/fastfetch/about.txt"
+echo "  Text logo: $THEME_DIR/fastfetch/about.txt"
