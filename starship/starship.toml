@@ -8,6 +8,7 @@ palette = "miami_wind"
 format = """
 [░▒▓](pink)\
 [ 󱚝 ](bg:pink fg:black)\
+$hostname\
 $directory\
 ${custom.git_block}\
 ${custom.left_endcap}\
@@ -15,6 +16,11 @@ $fill\
 ${custom.right_strip}\
 $line_break\
 $character"""
+
+[hostname]
+ssh_only = false
+style = "bg:pink fg:black"
+format = "[$hostname ]($style)"
 
 [directory]
 style = "fg:black bg:cyan"
