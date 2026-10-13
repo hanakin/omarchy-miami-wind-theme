@@ -134,42 +134,66 @@ segment_direnv() {
 	fi
 }
 
+# Columns left for this strip: terminal width minus the left side of the bar
+# (6 for the lead block, 1 so the fill never hits zero).
+esc="$(printf '\033')"
+cols="${MIAMI_WIND_COLS:-$( (stty size </dev/tty) 2>/dev/null | cut -d' ' -f2)}"
+left="$({ STARSHIP_SHELL=sh starship module hostname; STARSHIP_SHELL=sh starship module directory; "$(dirname "$0")/git-block.sh" render; } 2>/dev/null | sed "s/$esc\[[0-9;]*m//g" | tr -d '\n' | wc -m)"
+room=$(( ${cols:-9999} - left - 7 ))
+
+# Claim room for a segment (text plus its separator); fail when it does not fit.
+fits() {
+	[ -z "$1" ] && return 0
+	width=$(( $(printf '%s' "$1" | wc -m) + 1 ))
+	[ "$width" -le "$room" ] && room=$((room - width))
+}
+
 if [ "$status" -eq 0 ] 2>/dev/null; then
-	append_segment "$green_bg" "  "
+	status_seg="  "
+	status_bg="$green_bg"
 else
-	append_segment "$red_bg" "  $status "
+	status_seg="  $status "
+	status_bg="$red_bg"
 fi
+room=$((room - 1))
+fits "$status_seg"
+append_segment "$status_bg" "$status_seg"
+
+# Claimed in order of importance, drawn in display order: time, duration, then the rest.
+time_seg="  $(date '+%I:%M %p') "
+fits "$time_seg" || time_seg=""
 
 if [ "$duration" -ge 3000 ] 2>/dev/null; then
-	append_segment "$orange_bg" "  $((duration / 1000))s "
+	duration_seg="  $((duration / 1000))s "
+	fits "$duration_seg" && append_segment "$orange_bg" "$duration_seg"
 fi
 
 py_seg="$(segment_python)"
-[ -n "$py_seg" ] && append_lang_segment "$py_seg"
+[ -n "$py_seg" ] && fits "$py_seg" && append_lang_segment "$py_seg"
 
 node_seg="$(segment_node)"
-[ -n "$node_seg" ] && append_lang_segment "$node_seg"
+[ -n "$node_seg" ] && fits "$node_seg" && append_lang_segment "$node_seg"
 
 rust_seg="$(segment_rust)"
-[ -n "$rust_seg" ] && append_lang_segment "$rust_seg"
+[ -n "$rust_seg" ] && fits "$rust_seg" && append_lang_segment "$rust_seg"
 
 go_seg="$(segment_go)"
-[ -n "$go_seg" ] && append_lang_segment "$go_seg"
+[ -n "$go_seg" ] && fits "$go_seg" && append_lang_segment "$go_seg"
 
 java_seg="$(segment_java)"
-[ -n "$java_seg" ] && append_lang_segment "$java_seg"
+[ -n "$java_seg" ] && fits "$java_seg" && append_lang_segment "$java_seg"
 
 package_seg="$(segment_package)"
-[ -n "$package_seg" ] && append_lang_segment "$package_seg"
+[ -n "$package_seg" ] && fits "$package_seg" && append_lang_segment "$package_seg"
 
 docker_seg="$(segment_docker)"
-[ -n "$docker_seg" ] && append_segment "$blue_bg" "$docker_seg"
+[ -n "$docker_seg" ] && fits "$docker_seg" && append_segment "$blue_bg" "$docker_seg"
 
 aws_seg="$(segment_aws)"
-[ -n "$aws_seg" ] && append_segment "$yellow_bg" "$aws_seg"
+[ -n "$aws_seg" ] && fits "$aws_seg" && append_segment "$yellow_bg" "$aws_seg"
 
 direnv_seg="$(segment_direnv)"
-[ -n "$direnv_seg" ] && append_segment "$cyan_bg" "$direnv_seg"
+[ -n "$direnv_seg" ] && fits "$direnv_seg" && append_segment "$cyan_bg" "$direnv_seg"
 
-append_segment "$pink_bg" "  $(date '+%I:%M %p') "
-printf '\033[0m\033[38;2;%sm' "$pink_bg"
+append_segment "$pink_bg" "$time_seg"
+printf '\033[0m\033[38;2;%sm' "$current_bg"

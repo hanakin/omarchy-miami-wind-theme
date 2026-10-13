@@ -51,6 +51,29 @@ if [ -n "$git_dir" ]; then
 	[ -f "$git_dir/BISECT_LOG" ] && op_state="bisect"
 fi
 
+# Shorten the branch so the bar fits: at most a quarter of the terminal, and never
+# more than what is left after the lead block (6), host and path, this block's own
+# glyphs and counters, and the smallest right strip (7).
+cols="${MIAMI_WIND_COLS:-$( (stty size </dev/tty) 2>/dev/null | cut -d' ' -f2)}"
+if [ -n "$cols" ]; then
+	esc="$(printf '\033')"
+	used="$({ STARSHIP_SHELL=sh starship module hostname; STARSHIP_SHELL=sh starship module directory; } 2>/dev/null | sed "s/$esc\[[0-9;]*m//g" | tr -d '\n' | wc -m)"
+	used=$((used + 6 + 8 + 7))
+	for count in "$ahead" "$staged" "$untracked" "$unstaged" "$behind" "$conflicted"; do
+		[ "${count:-0}" -gt 0 ] && used=$((used + ${#count} + 2))
+	done
+	[ -n "$op_state" ] && used=$((used + ${#op_state} + 1))
+	max_branch=$((cols / 4))
+	[ "$max_branch" -lt 12 ] && max_branch=12
+	[ $((cols - used)) -lt "$max_branch" ] && max_branch=$((cols - used))
+	# No room even for a stub: draw only the endcap, like outside a repo.
+	if [ "$max_branch" -lt 2 ]; then
+		[ "$mode" = render ] && printf '\033[38;2;34;211;238m\033[0m'
+		exit 0
+	fi
+	[ "${#branch}" -gt "$max_branch" ] && branch="$(printf '%s' "$branch" | cut -c1-$((max_branch - 1)))…"
+fi
+
 state="clean"
 bg="69;71;90"
 branch_fg="74;222;128"
