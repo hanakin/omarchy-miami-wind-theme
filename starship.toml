@@ -37,17 +37,20 @@ truncate_to_repo = false
 "Developer" = "󰲋 "
 
 [custom.git_block]
+shell = ["sh"]
 when = 'git rev-parse --is-inside-work-tree >/dev/null 2>&1'
 command = 'sh "$HOME/.config/omarchy/themes/miami-wind/starship/git-block.sh" render'
 format = "$output"
 unsafe_no_escape = true
 
 [custom.left_endcap]
+shell = ["sh"]
 when = '! git rev-parse --is-inside-work-tree >/dev/null 2>&1'
 command = "printf ''"
 format = "[$output](fg:cyan)"
 
 [custom.right_strip]
+shell = ["sh"]
 when = "true"
 command = 'sh "$HOME/.config/omarchy/themes/miami-wind/starship/right-strip.sh"'
 format = "$output"

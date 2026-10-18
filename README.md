@@ -1,5 +1,5 @@
 # Miami Wind Omarchy Theme
-An Omarchy theme based on Miami Wind color scheme which is a blend of colors from [Tailwind CSS](https://tailwindcss.com/docs/colors) and Grayscale colors from [Catppuccin Mocha](https://catppuccin.com/) with inspiration from the theme [Miami Nights](https://github.com/monkeytypegame/monkeytype/blob/master/frontend/static/themes/miami_nights.css) for [Monkeytype](https://www.monkeytype.com). Color Swatches built using [Coolors](https://coolors.co/)
+An Omarchy theme based on Miami Wind color scheme which is a blend of colors from [Tailwind CSS](https://tailwindcss.com/docs/colors) and Grayscale colors from [Catppuccin Mocha](https://catppuccin.com/) with inspiration from the theme [Miami Nights](https://github.com/monkeytypegame/monkeytype/blob/master/frontend/src/ts/constants/themes.ts) for [Monkeytype](https://www.monkeytype.com). Color Swatches built using [Coolors](https://coolors.co/)
 
 ## Installation
 
@@ -14,22 +14,26 @@ That installs the colors: `colors.toml` drives the terminals, Hyprland borders, 
 The theme also ships a Starship prompt and a Fastfetch layout. Omarchy does not load either from a theme, so link your configs to the copies in the installed theme. Any existing file is moved aside with a `.bak.<timestamp>` suffix.
 
 ```bash
-cd ~/.config && mkdir -p fastfetch
-for f in starship.toml fastfetch/config.jsonc; do
-  if [ -e "$f" ] || [ -L "$f" ]; then mv "$f" "$f.bak.$(date +%Y%m%d%H%M%S)"; fi
-  ln -s ~/.config/omarchy/themes/miami-wind/"$f" "$f"
-done
+(
+  cd ~/.config && mkdir -p fastfetch
+  for f in starship.toml fastfetch/config.jsonc; do
+    t=~/.config/omarchy/themes/miami-wind/$f
+    [ "$(readlink "$f")" = "$t" ] && continue
+    if [ -e "$f" ] || [ -L "$f" ]; then mv "$f" "$f.bak.$(date +%Y%m%d%H%M%S)"; fi
+    ln -s "$t" "$f"
+  done
+)
 ```
 
-The prompt's glyphs need a Nerd Font in your terminal (Omarchy's default font is one).
+The links follow the installed theme, so the prompt and layout stay Miami Wind under other themes and pick up `omarchy theme update`. To undo, delete the two links and rename the `.bak` files back; after `omarchy theme remove miami-wind` the links dangle and both tools fall back to their defaults.
 
 The icon setting is `Flatery-Pink-Dark`. It takes effect once the [Flatery](https://github.com/cbrnix/Flatery) Pink Dark icons and the `Flatery` and `Flatery-Dark` base directories they link to are installed; until then apps use the default icons. The AUR package `flatery-icon-theme-git` installs only the two base directories, so copy all three from the source:
 
 ```bash
-git clone --depth 1 https://github.com/cbrnix/Flatery.git /tmp/flatery
-mkdir -p ~/.local/share/icons
-cp -a /tmp/flatery/Flatery /tmp/flatery/Flatery-Dark /tmp/flatery/Flatery-Pink-Dark ~/.local/share/icons/
-rm -rf /tmp/flatery
+d=$(mktemp -d) && git clone --depth 1 https://github.com/cbrnix/Flatery "$d" &&
+  mkdir -p ~/.local/share/icons &&
+  cp -a "$d"/Flatery "$d"/Flatery-Dark "$d"/Flatery-Pink-Dark ~/.local/share/icons/
+rm -rf "$d"
 ```
 
 For Obsidian there is also a dedicated [Miami Wind Obsidian theme](https://github.com/hanakin/miami-wind-obsidian-theme), an alternative to the coloring Omarchy applies to Obsidian automatically.
