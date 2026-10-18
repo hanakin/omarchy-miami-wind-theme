@@ -11,8 +11,6 @@ That is the whole install. The theme is colors only: `colors.toml` drives the te
 
 The icon setting is `Flatery-Pink-Dark`. It only takes effect when the [Flatery](https://github.com/cbrnix/Flatery) Pink Dark icons are installed (together with the `Flatery` and `Flatery-Dark` base directories they link to). Without them, apps fall back to the default GTK icons.
 
-The Starship prompt, Fastfetch configuration, About launcher, Flatery icon download, VS Code extension and terminal font settings are not part of the theme. They live in the separate [hanakin/omarchy-setup](https://github.com/hanakin/omarchy-setup) configs repo.
-
 ## Preview
 
 ![Preview](./preview.png)
