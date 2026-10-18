@@ -7,9 +7,30 @@ An Omarchy theme based on Miami Wind color scheme which is a blend of colors fro
 omarchy theme install https://github.com/hanakin/omarchy-miami-wind-theme
 ```
 
-That is the whole install. The theme is colors only: `colors.toml` drives the terminals, Hyprland borders, editors and the rest of Omarchy through its templates, alongside the shipped btop and Chromium colors, the icon setting and the backgrounds.
+That installs the colors: `colors.toml` drives the terminals, Hyprland borders, editors and the rest of Omarchy through its templates, alongside the shipped btop and Chromium colors, the icon setting and the backgrounds.
 
-The icon setting is `Flatery-Pink-Dark`. It only takes effect when the [Flatery](https://github.com/cbrnix/Flatery) Pink Dark icons are installed (together with the `Flatery` and `Flatery-Dark` base directories they link to). Without them, apps fall back to the default GTK icons.
+## Extras
+
+The theme also ships a Starship prompt and a Fastfetch layout. Omarchy does not load either from a theme, so link your configs to the copies in the installed theme. Any existing file is moved aside with a `.bak.<timestamp>` suffix.
+
+```bash
+cd ~/.config && mkdir -p fastfetch
+for f in starship.toml fastfetch/config.jsonc; do
+  if [ -e "$f" ] || [ -L "$f" ]; then mv "$f" "$f.bak.$(date +%Y%m%d%H%M%S)"; fi
+  ln -s ~/.config/omarchy/themes/miami-wind/"$f" "$f"
+done
+```
+
+The prompt's glyphs need a Nerd Font in your terminal (Omarchy's default font is one).
+
+The icon setting is `Flatery-Pink-Dark`. It takes effect once the [Flatery](https://github.com/cbrnix/Flatery) Pink Dark icons and the `Flatery` and `Flatery-Dark` base directories they link to are installed; until then apps use the default icons. The AUR package `flatery-icon-theme-git` installs only the two base directories, so copy all three from the source:
+
+```bash
+git clone --depth 1 https://github.com/cbrnix/Flatery.git /tmp/flatery
+mkdir -p ~/.local/share/icons
+cp -a /tmp/flatery/Flatery /tmp/flatery/Flatery-Dark /tmp/flatery/Flatery-Pink-Dark ~/.local/share/icons/
+rm -rf /tmp/flatery
+```
 
 ## Preview
 
