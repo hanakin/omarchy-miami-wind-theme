@@ -18,10 +18,10 @@ BRANCH = 'feature/a-long-branch-name-that-keeps-going'
 
 @unittest.skipUnless(shutil.which('starship') and shutil.which('git'), 'needs starship and git')
 class PromptWidthTests(unittest.TestCase):
-    def bar(self, home, cwd, width):
+    def bar(self, home, cwd, width, *flags):
         env = dict(os.environ, HOME=str(home), STARSHIP_CONFIG=str(ROOT / 'starship.toml'),
                    STARSHIP_SHELL='sh', MIAMI_WIND_COLS=str(width), PWD=str(cwd))
-        out = subprocess.run(['starship', 'prompt', '--terminal-width', str(width)],
+        out = subprocess.run(['starship', 'prompt', '--terminal-width', str(width), *flags],
                              cwd=cwd, env=env, capture_output=True, text=True, check=True).stdout
         return re.sub(r'\x1b\[[0-9;]*m', '', out).strip('\n').split('\n')[0]
 
@@ -42,6 +42,11 @@ class PromptWidthTests(unittest.TestCase):
             self.assertIn('PM', self.bar(home, repo, 200).replace('AM', 'PM'))
             self.assertIn('1.2.3', self.bar(home, repo, 200))
             self.assertIn(BRANCH, self.bar(home, repo, 200))
+            # Status and duration reach the right strip only through starship's own arguments.
+            self.assertIn(' 1 ', self.bar(home, repo, 200, '--status=1'))
+            self.assertNotIn(' 1 ', self.bar(home, repo, 200, '--status=0'))
+            self.assertIn(' 5s ', self.bar(home, repo, 200, '--cmd-duration=5000'))
+            self.assertNotIn(' 2s ', self.bar(home, repo, 200, '--cmd-duration=2000'))
 
 
 if __name__ == '__main__':

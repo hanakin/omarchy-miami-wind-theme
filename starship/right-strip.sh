@@ -1,7 +1,16 @@
 #!/bin/sh
 
-status="${STARSHIP_CMD_STATUS:-0}"
-duration="${STARSHIP_DURATION:-0}"
+# Starship gives custom commands neither the last exit status nor its duration;
+# they exist only on the command line of the starship process that runs us.
+pid=$PPID
+while [ "${pid:-1}" -gt 1 ] && [ "$(cat "/proc/$pid/comm" 2>/dev/null)" != starship ]; do
+	pid=$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')
+done
+args="$(tr '\0' '\n' <"/proc/$pid/cmdline" 2>/dev/null)"
+status="$(printf '%s\n' "$args" | sed -n 's/^--status=//p')"
+duration="$(printf '%s\n' "$args" | sed -n 's/^--cmd-duration=//p')"
+status="${status:-0}"
+duration="${duration:-0}"
 
 base_fg="30;30;46"
 green_bg="52;211;153"
