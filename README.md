@@ -11,32 +11,145 @@ That installs the colors: `colors.toml` drives the terminals, Hyprland borders, 
 
 ## Extras
 
-The theme also ships a Starship prompt and a Fastfetch layout. Omarchy does not load either from a theme, so link your configs to the copies in the installed theme. Any existing file is moved aside with a `.bak.<timestamp>` suffix.
+These are optional. Pick the ones you want and do them one at a time.
+
+For each step: copy the line, paste it into your terminal, and press Enter.
+
+### Prompt (Starship)
+
+The colored bar above the line where you type.
+
+1. Save your current prompt settings, in case you want them back:
+
+   ```bash
+   mv ~/.config/starship.toml ~/.config/starship.toml.bak
+   ```
+
+   If it says "No such file or directory", that's fine. Go to step 2.
+
+2. Turn on the Miami Wind prompt:
+
+   ```bash
+   ln -s ~/.config/omarchy/themes/miami-wind/starship.toml ~/.config/starship.toml
+   ```
+
+3. Open a new terminal window to see it.
+
+### System info (Fastfetch)
+
+The Miami Wind logo and system info screen.
+
+1. Make sure the settings folder exists:
+
+   ```bash
+   mkdir -p ~/.config/fastfetch
+   ```
+
+2. Save your current settings, in case you want them back:
+
+   ```bash
+   mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
+   ```
+
+   If it says "No such file or directory", that's fine. Go to step 3.
+
+3. Turn on the Miami Wind layout:
+
+   ```bash
+   ln -s ~/.config/omarchy/themes/miami-wind/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
+   ```
+
+4. Try it:
+
+   ```bash
+   fastfetch
+   ```
+
+### Icons (Flatery)
+
+The pink icons for folders and apps.
+
+1. Download the icons:
+
+   ```bash
+   git clone --depth 1 https://github.com/cbrnix/Flatery ~/Flatery
+   ```
+
+2. Make sure the icons folder exists:
+
+   ```bash
+   mkdir -p ~/.local/share/icons
+   ```
+
+3. Copy the icons into it (all three folders are needed):
+
+   ```bash
+   cp -a ~/Flatery/Flatery ~/Flatery/Flatery-Dark ~/Flatery/Flatery-Pink-Dark ~/.local/share/icons/
+   ```
+
+4. Delete the download, you don't need it anymore:
+
+   ```bash
+   rm -rf ~/Flatery
+   ```
+
+5. Close and reopen your apps (like Files) to see the new icons.
+
+### Obsidian
+
+Omarchy already colors Obsidian to match. For the full [Miami Wind Obsidian theme](https://github.com/hanakin/miami-wind-obsidian-theme) instead:
+
+1. Go to your vault's folder. Change `~/Documents/MyVault` to where your vault is (in Obsidian, click your vault's name in the bottom left, then **Manage vaults** to see where it is):
+
+   ```bash
+   cd ~/Documents/MyVault
+   ```
+
+2. Make a folder for the theme:
+
+   ```bash
+   mkdir -p ".obsidian/themes/Miami Wind"
+   ```
+
+3. Download the theme:
+
+   ```bash
+   curl -L -o ".obsidian/themes/Miami Wind/theme.css" https://raw.githubusercontent.com/hanakin/miami-wind-obsidian-theme/main/theme.css
+   ```
+
+4. Download the theme's info file:
+
+   ```bash
+   curl -L -o ".obsidian/themes/Miami Wind/manifest.json" https://raw.githubusercontent.com/hanakin/miami-wind-obsidian-theme/main/manifest.json
+   ```
+
+5. In Obsidian, open **Settings**, then **Appearance**, and pick **Miami Wind** under **Themes**.
+
+### Undo
+
+To go back, delete the link and put your saved file back. For the prompt:
 
 ```bash
-(
-  cd ~/.config && mkdir -p fastfetch
-  for f in starship.toml fastfetch/config.jsonc; do
-    t=~/.config/omarchy/themes/miami-wind/$f
-    [ "$(readlink "$f")" = "$t" ] && continue
-    if [ -e "$f" ] || [ -L "$f" ]; then mv "$f" "$f.bak.$(date +%Y%m%d%H%M%S)"; fi
-    ln -s "$t" "$f"
-  done
-)
+rm ~/.config/starship.toml
 ```
-
-The links follow the installed theme, so the prompt and layout stay Miami Wind under other themes and pick up `omarchy theme update`. To undo, delete the two links and rename the `.bak` files back; after `omarchy theme remove miami-wind` the links dangle and both tools fall back to their defaults.
-
-The icon setting is `Flatery-Pink-Dark`. It takes effect once the [Flatery](https://github.com/cbrnix/Flatery) Pink Dark icons and the `Flatery` and `Flatery-Dark` base directories they link to are installed; until then apps use the default icons. The AUR package `flatery-icon-theme-git` installs only the two base directories, so copy all three from the source:
 
 ```bash
-d=$(mktemp -d) && git clone --depth 1 https://github.com/cbrnix/Flatery "$d" &&
-  mkdir -p ~/.local/share/icons &&
-  cp -a "$d"/Flatery "$d"/Flatery-Dark "$d"/Flatery-Pink-Dark ~/.local/share/icons/
-rm -rf "$d"
+mv ~/.config/starship.toml.bak ~/.config/starship.toml
 ```
 
-For Obsidian there is also a dedicated [Miami Wind Obsidian theme](https://github.com/hanakin/miami-wind-obsidian-theme), an alternative to the coloring Omarchy applies to Obsidian automatically.
+If it says "No such file or directory", you didn't have one before. That's fine.
+
+For Fastfetch:
+
+```bash
+rm ~/.config/fastfetch/config.jsonc
+```
+
+```bash
+mv ~/.config/fastfetch/config.jsonc.bak ~/.config/fastfetch/config.jsonc
+```
+
+If it says "No such file or directory", you didn't have one before. That's fine.
 
 ## Preview
 
