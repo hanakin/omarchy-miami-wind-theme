@@ -32,6 +32,8 @@ cp -a /tmp/flatery/Flatery /tmp/flatery/Flatery-Dark /tmp/flatery/Flatery-Pink-D
 rm -rf /tmp/flatery
 ```
 
+For Obsidian there is also a dedicated [Miami Wind Obsidian theme](https://github.com/hanakin/miami-wind-obsidian-theme), an alternative to the coloring Omarchy applies to Obsidian automatically.
+
 ## Preview
 
 ![Preview](./preview.png)
