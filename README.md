@@ -95,6 +95,36 @@ The pink icons for folders and apps.
 
 5. Close and reopen your apps (like Files) to see the new icons.
 
+### VS Code
+
+Omarchy already colors VS Code to match. For the full [Miami Wind VS Code theme](https://github.com/hanakin/miami-wind-vscode) instead:
+
+1. Install the theme:
+
+   ```bash
+   code --install-extension hanakin.miami-wind
+   ```
+
+2. Stop Omarchy from switching VS Code back to its own colors every time you change themes. First make the settings folder:
+
+   ```bash
+   mkdir -p ~/.local/state/omarchy/toggles
+   ```
+
+3. Then turn the switching off:
+
+   ```bash
+   touch ~/.local/state/omarchy/toggles/skip-vscode-theme-changes
+   ```
+
+4. In VS Code, press `Ctrl+K`, let go, then press `Ctrl+T`. Pick **Miami Wind** from the list.
+
+To let Omarchy color VS Code again later:
+
+```bash
+rm ~/.local/state/omarchy/toggles/skip-vscode-theme-changes
+```
+
 ### Obsidian
 
 Omarchy already colors Obsidian to match. For the full [Miami Wind Obsidian theme](https://github.com/hanakin/miami-wind-obsidian-theme) instead:
