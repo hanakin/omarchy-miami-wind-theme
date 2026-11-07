@@ -6,3 +6,6 @@
 *.bak
 *.bak.*
 __pycache__/
+
+# Links to full-res originals of the backgrounds, made on the owner's machines
+/.backgrounds-full-res/
