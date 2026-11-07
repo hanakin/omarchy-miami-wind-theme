@@ -15,6 +15,10 @@ These are optional. Pick the ones you want and do them one at a time.
 
 For each step: copy the line, paste it into your terminal, and press Enter.
 
+### Prompt (Starship)
+
+The colored bar above the line where you type. It lives in its own repo: follow the install steps in [omarchy-miami-wind-starship](https://github.com/hanakin/omarchy-miami-wind-starship).
+
 ### System info (Fastfetch)
 
 The Miami Wind logo and system info screen.
