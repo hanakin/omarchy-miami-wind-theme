@@ -15,26 +15,6 @@ These are optional. Pick the ones you want and do them one at a time.
 
 For each step: copy the line, paste it into your terminal, and press Enter.
 
-### Prompt (Starship)
-
-The colored bar above the line where you type.
-
-1. Save your current prompt settings, in case you want them back:
-
-   ```bash
-   mv ~/.config/starship.toml ~/.config/starship.toml.bak
-   ```
-
-   If it says "No such file or directory", that's fine. Go to step 2.
-
-2. Turn on the Miami Wind prompt:
-
-   ```bash
-   ln -s ~/.config/omarchy/themes/miami-wind/starship.toml ~/.config/starship.toml
-   ```
-
-3. Open a new terminal window to see it.
-
 ### System info (Fastfetch)
 
 The Miami Wind logo and system info screen.
@@ -157,19 +137,7 @@ Omarchy already colors Obsidian to match. For the full [Miami Wind Obsidian them
 
 ### Undo
 
-To go back, delete the link and put your saved file back. For the prompt:
-
-```bash
-rm ~/.config/starship.toml
-```
-
-```bash
-mv ~/.config/starship.toml.bak ~/.config/starship.toml
-```
-
-If it says "No such file or directory", you didn't have one before. That's fine.
-
-For Fastfetch:
+To undo the Fastfetch step, delete the link and put your saved file back:
 
 ```bash
 rm ~/.config/fastfetch/config.jsonc
