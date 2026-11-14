@@ -7,7 +7,7 @@ An Omarchy theme based on Miami Wind color scheme which is a blend of colors fro
 omarchy theme install https://github.com/hanakin/omarchy-miami-wind-theme
 ```
 
-That installs the colors: `colors.toml` drives the terminals, Hyprland borders, editors and the rest of Omarchy through its templates, alongside the shipped btop and Chromium colors, the icon setting and the backgrounds.
+That installs the colors: `colors.toml` drives the terminals, Hyprland borders, editors and the rest of Omarchy through its templates, alongside the shipped btop and Chromium colors, the menu and launcher colors (`shell.menu.toml`, `shell.launcher.toml`), the icon setting and the backgrounds.
 
 ## Extras
 
