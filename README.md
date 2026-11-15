@@ -1,4 +1,7 @@
 # Miami Wind Omarchy Theme
+
+![Miami Wind v1.1.0](imgs/version-badge.svg)
+
 An Omarchy theme based on Miami Wind color scheme which is a blend of colors from [Tailwind CSS](https://tailwindcss.com/docs/colors) and Grayscale colors from [Catppuccin Mocha](https://catppuccin.com/) with inspiration from the theme [Miami Nights](https://github.com/monkeytypegame/monkeytype/blob/master/frontend/src/ts/constants/themes.ts) for [Monkeytype](https://www.monkeytype.com). Color Swatches built using [Coolors](https://coolors.co/)
 
 ## Installation
