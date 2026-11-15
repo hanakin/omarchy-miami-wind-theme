@@ -8,11 +8,6 @@
     <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
     <stop offset="1" stop-color="#000" stop-opacity=".25"/>
   </linearGradient>
-  <!-- Dark top, light bottom: makes the favicon look inset. -->
-  <linearGradient id="inset" x2="0" y2="1">
-    <stop offset="0" stop-color="#000" stop-opacity=".5"/>
-    <stop offset="1" stop-color="#fff" stop-opacity=".6"/>
-  </linearGradient>
   <clipPath id="r"><rect width="78" height="20" rx="3"/></clipPath>
   <g transform="translate(3 2)">
     <rect width="78" height="20" rx="3" fill="#f472b6" filter="url(#shadow)"/>
@@ -21,6 +16,8 @@
       <rect x="28" width="50" height="20" fill="#f472b6"/>
       <rect width="78" height="20" fill="url(#raise)"/>
     </g>
+    <!-- Same 1px shadow as the text. -->
+    <circle cx="13" cy="11" r="8" fill="#010101" fill-opacity=".3"/>
     <svg x="5" y="2" width="16" height="16" viewBox="0 0 512 512" fill="none">
       <circle cx="256" cy="256" r="256" fill="#09162A"/>
       <path d="M256 0C397.385 0 512 114.615 512 256C512 300.089 500.854 341.575 481.226 377.794H474.764V332.8H450.715V377.794H438.303V293.236H407.273V374.691H392.533V339.006H364.606V395.636H353.745V364.606H338.23V379.345H321.164C336.888 362.79 341.226 350.445 339.782 325.818C331.501 327.261 323.879 329.697 311.079 329.697C327.37 304.097 351.806 288.582 358.788 275.394C329.697 252.897 298.553 248.5 264.533 257.552C230.513 266.603 195.879 309.139 176.873 353.745V318.061H151.273V370.036H139.636V341.333H121.018V357.624H103.176V394.861H86.8848V366.158H76.0242V332.8H50.4242V378.57H31.1962C11.3066 342.168 0 300.404 0 256C0 114.615 114.615 0 256 0Z" fill="#EC4899"/>
@@ -37,7 +34,6 @@
       <circle cx="465.067" cy="185.018" r="2.71515" fill="#F472B6"/>
       <circle cx="192.776" cy="46.9333" r="2.71515" fill="#F472B6"/>
     </svg>
-    <circle cx="13" cy="10" r="8.5" fill="none" stroke="url(#inset)" stroke-width="1"/>
     <g fill="#fff" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle">
       <text x="53" y="15" fill="#010101" fill-opacity=".3" textLength="38">v1.1.0</text>
       <text x="53" y="14" textLength="38">v1.1.0</text>
